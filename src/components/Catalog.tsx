@@ -9,9 +9,9 @@ const Catalog: React.FC = () => {
    * o nosso state, o qual podemos acessar cada propriedade desse state, por ex:
    * const email = useSelector(state => state.email)
    */
-  const state = useSelector(state => state);
+  const catalog = useSelector(state => state);
 
-  console.log(state)
+  console.log(catalog)
 
   return (
     <h1>Catalog</h1>
