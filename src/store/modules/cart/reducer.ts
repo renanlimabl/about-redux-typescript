@@ -39,11 +39,19 @@ const cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
       case 'ADD_PRODUCT_TO_CART': {
         const { product } = action.payload
 
+        const productInCartIndex = draft.items.findIndex(item =>
+          item.product.id === product.id
+        );
 
-        draft.items.push({
-          product,
-          quantity: 1,
-        })
+        if (productInCartIndex >= 0) {
+          // pegar o item na posição exata
+          draft.items[productInCartIndex].quantity += 1
+        } else {
+          draft.items.push({
+            product,
+            quantity: 1,
+          })
+        }
         // Antes sem o immer
         /*
         return {
