@@ -4,6 +4,10 @@
 
 import { Reducer } from "redux";
 import { ICartState } from "./types";
+/**
+ * Produce ele produz um estado, a partir de um rascunho do estado anterior
+ */
+import produce from 'immer';
 
 const INITIAL_STATE: ICartState = {
   items: []
@@ -19,27 +23,91 @@ const INITIAL_STATE: ICartState = {
  * @param state É sempre o estado anterior
  * @param action É a action que está sendo disparada
  */
+
+/**
+* @param state = Estado inicial
+* @param draft = Rascunho, ele tem o mesmo formato do estado, a diferença é que
+* podemos utilizar métodos que não precisam do conceito da imutabilidade, e no final
+* ele vai comparar o rascunho com o state e fazer as alterações de forma altomática 
+* por de baixo dos panos.
+*/
+
 const cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
   // console.log(state, action)
-  switch (action.type) {
-    case 'ADD_PRODUCT_TO_CART': {
-      const { product } = action.payload
-      return {
-        ...state,
-        items: [
-          ...state.items,
-          {
-            product,
-            quantity: 1
-          }
-        ]
-      };
-    }
+  return produce(state, draft => {
+    switch (action.type) {
+      case 'ADD_PRODUCT_TO_CART': {
+        const { product } = action.payload
 
-    default: {
-      return state;
+
+        draft.items.push({
+          product,
+          quantity: 1,
+        })
+        // Antes sem o immer
+        /*
+        return {
+          ...state,
+          items: [
+            ...state.items,
+            {
+              product,
+              quantity: 1
+            }
+          ]
+        };
+        */
+        break;
+      }
+
+
+      default: {
+        return draft;
+      }
     }
-  }
+  })
+
 }
+
+
+// const cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
+//   // console.log(state, action)
+//   switch (action.type) {
+//     case 'ADD_PRODUCT_TO_CART': {
+//       const { product } = action.payload
+
+//       /**
+//        * @param state = Estado inicial
+//        * @param draft = Rascunho, ele tem o mesmo formato do estado, a diferença é que
+//        * podemos utilizar métodos que não precisam do conceito da imutabilidade, e no final
+//        * ele vai comparar o rascunho com o state e fazer as alterações de forma altomática 
+//        * por de baixo dos panos.
+//        */
+//       return produce(state, draft => {
+//         draft.items.push({
+//           product,
+//           quantity: 1,
+//         })
+//       })
+//       // Antes sem o immer
+//       /*
+//       return {
+//         ...state,
+//         items: [
+//           ...state.items,
+//           {
+//             product,
+//             quantity: 1
+//           }
+//         ]
+//       };
+//       */
+//     }
+
+//     default: {
+//       return state;
+//     }
+//   }
+// }
 
 export default cart;
