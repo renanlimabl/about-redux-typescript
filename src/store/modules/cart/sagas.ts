@@ -4,7 +4,7 @@
  */
 import { all, takeLatest, select } from 'redux-saga/effects';
 import { IState } from '../..';
-import { addProductToCart } from './actions';
+import { addProductToCartRequest } from './actions';
 
 /**
  * Dentro do sagas, sempre utilizaremos um generator
@@ -16,7 +16,7 @@ import { addProductToCart } from './actions';
  * porém é preciso, então temos que pegar o retorno da action, no caso addProductToCart,
  * utilizaremos a palavra chave do typescript ReturnType<typeof addProductToCart>
  */
-type CheckProductRequest = ReturnType<typeof addProductToCart>
+type CheckProductRequest = ReturnType<typeof addProductToCartRequest>
 
 /**
  * Nossa action é a função addProductToCart, que no caso retorna o type e o payload,
@@ -45,5 +45,5 @@ export default all([
    * E essa função do segundo parâmetro é passada as actions para os parâmetros dela.
    * Ex: checkProductStock(action)
    */
-  takeLatest('ADD_PRODUCT_TO_CART', checkProductStock)
+  takeLatest('ADD_PRODUCT_TO_CART_REQUEST', checkProductStock)
 ])
