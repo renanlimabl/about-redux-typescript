@@ -13,6 +13,11 @@ export interface ICartItem {
   quantity: number;
 }
 
+/**
+ * Aqui no typescript, criamos o failedStockCheck para armazenar os id's dos produtos que
+ * falharam ao ser adicionados por falta de estoque.
+ */
 export interface ICartState {
   items: ICartItem[];
+  failedStockCheck: number[];
 }
