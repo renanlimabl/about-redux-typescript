@@ -1,4 +1,4 @@
-import { IProduct } from "./types";
+import { ActionTypes, IProduct } from "./types";
 
 /**
  * Quase sempre precisaremos de 3 actions para cada regra, porque uma irá fazer a request!
@@ -7,7 +7,7 @@ import { IProduct } from "./types";
 
 export function addProductToCartRequest(product: IProduct) {
   return {
-    type: 'ADD_PRODUCT_TO_CART_REQUEST',
+    type: ActionTypes.addProductToCartRequest,
     payload: {
       product,
     }
@@ -16,7 +16,7 @@ export function addProductToCartRequest(product: IProduct) {
 
 export function addProductToCartSuccess(product: IProduct) {
   return {
-    type: 'ADD_PRODUCT_TO_CART_SUCCESS',
+    type: ActionTypes.addProductToCartSuccess,
     payload: {
       product,
     }
@@ -25,7 +25,7 @@ export function addProductToCartSuccess(product: IProduct) {
 
 export function addProductToCartFailure(productId: number) {
   return {
-    type: 'ADD_PRODUCT_TO_CART_FAILURE',
+    type: ActionTypes.addProductToCartFailure,
     payload: {
       productId,
     }

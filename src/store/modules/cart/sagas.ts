@@ -9,6 +9,7 @@ import { IState } from '../..';
 import { addProductToCartFailure, addProductToCartRequest, addProductToCartSuccess } from './actions';
 import api from '../../../services/api';
 import { AxiosResponse } from 'axios';
+import { ActionTypes } from './types';
 
 /**
  * Dentro do sagas, sempre utilizaremos um generator
@@ -78,7 +79,6 @@ function* checkProductStock({ payload }: CheckProductRequest) {
     console.log('deu errado, falta estoque')
   }
 
-  console.log(currentQuantity)
 }
 
 export default all([
@@ -88,5 +88,5 @@ export default all([
    * E essa função do segundo parâmetro é passada as actions para os parâmetros dela.
    * Ex: checkProductStock(action)
    */
-  takeLatest('ADD_PRODUCT_TO_CART_REQUEST', checkProductStock)
+  takeLatest(ActionTypes.addProductToCartRequest, checkProductStock)
 ])

@@ -1,4 +1,13 @@
 /**
+ * Enum praticamente é uma propriedade que tem um valor.
+ */
+export enum ActionTypes {
+  addProductToCartRequest = 'ADD_PRODUCT_TO_CART_REQUEST',
+  addProductToCartSuccess = 'ADD_PRODUCT_TO_CART_SUCCESS',
+  addProductToCartFailure = 'ADD_PRODUCT_TO_CART_FAILURE',
+}
+
+/**
  * Interfaces são apenas para Typescript.
  */
 
